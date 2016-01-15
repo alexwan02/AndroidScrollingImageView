@@ -130,7 +130,11 @@ public class ScrollingImageView extends View {
 
         if (isStarted && speed != 0) {
             offset -= abs(speed);
-            postInvalidateOnAnimation();
+            if(VERSION.SDK_INT > VERSION_CODES.JELLY_BEAN){
+                postInvalidateOnAnimation();
+            }else{
+                invalidate();
+            }
         }
     }
 
@@ -152,7 +156,11 @@ public class ScrollingImageView extends View {
     public void start() {
         if (!isStarted) {
             isStarted = true;
-            postInvalidateOnAnimation();
+            if(VERSION.SDK_INT > VERSION_CODES.JELLY_BEAN){
+                postInvalidateOnAnimation();
+            }else{
+                invalidate();
+            }
         }
     }
 
@@ -162,7 +170,11 @@ public class ScrollingImageView extends View {
     public void stop() {
         if (isStarted) {
             isStarted = false;
-            invalidate();
+            if(VERSION.SDK_INT > VERSION_CODES.JELLY_BEAN){
+                postInvalidateOnAnimation();
+            }else{
+                invalidate();
+            }
         }
     }
 
